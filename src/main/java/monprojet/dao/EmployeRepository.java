@@ -1,6 +1,8 @@
 package monprojet.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
 import monprojet.entity.Employe;
 
 public interface EmployeRepository extends JpaRepository<Employe, Integer> {
@@ -11,6 +13,11 @@ public interface EmployeRepository extends JpaRepository<Employe, Integer> {
      * @param nomDeLemploye
      * @return L'employe correspondant au nom fourni, ou null si pas trouvé.
      */
-    Employe findByNom(String nomDeLemploye);
+    Employe findByNom(String nomDeLemploye);   
+
+
+    @Query("SELECT SUM(part.pourcentage) FROM Participation part "
+    + "WHERE part.contributeur.matricule  = :contributeur AND part.affectation.fin IS NULL")
+    Long calculPourcentage(int contributeur);
 
 }

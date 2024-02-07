@@ -27,4 +27,10 @@ class EmployeRepositoryTest {
         assertNotNull(employe, "On doit trouver l'employé Rémi Bastide dans data.sql");
         assertEquals("Remi.Bastide@univ-jfc.fr", employe.getEmail());
     }
+
+    @Test
+    void calculPourcentage(){
+        Long pourcentageAnatole = dao.calculPourcentage(4);
+        assertEquals(pourcentageAnatole, 40);
+    }
 }
